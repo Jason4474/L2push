@@ -7,19 +7,19 @@ import os
 
 # 配置地址端口用户口令
 TRANS_CONF = {
-	'HOST': 'x.x.x.x',
+	'HOST': '47.101.211.147',
 	'PORT': 9101,
-	'TOKEN': 'test'
+	'TOKEN': 'xxxxxx'
 }
 
 ORDER_CONF = {
-	'HOST': 'x.x.x.x',
+	'HOST': '47.101.211.147',
 	'PORT': 9102,
-	'TOKEN': 'test'
+	'TOKEN': 'xxxxxx'
 }
 
 # 配置订阅证券代码
-SUBSCR_CODE = '000001,600000'
+SUBSCR_CODE = '000001,600000,159919,510300'
 
 
 # ====================================================================================================
@@ -91,7 +91,7 @@ def get_trans(my_conf):
 				# 用户定义如何使用数据
 				# 示例————输出到文件和屏幕打印笔数
 				now = time.strftime("%H:%M:%S", time.localtime(int(time.time())))
-				for line in datalist:
+				for line in datalist: # 一行就是一笔数据，按字段顺序使用即可
 					line = list(line)
 					line[0] = line[0].decode()
 					line[10] = line[10].decode()
@@ -180,7 +180,7 @@ def get_order(my_conf):
 				# 用户定义如何使用数据
 				# 示例————输出到文件和屏幕打印笔数
 				now = time.strftime("%H:%M:%S", time.localtime(int(time.time())))
-				for line in datalist:
+				for line in datalist: # 一行就是一笔数据，按字段顺序使用即可
 					line = list(line)
 					line[0] = line[0].decode()
 					line[7] = line[7].decode()
@@ -204,7 +204,6 @@ def get_order(my_conf):
 # ====================================================================================================
 if __name__ == '__main__':
 
-	
 	# 成交数据进程
 	p_get_trans = multiprocessing.Process(target=get_trans, name='GET_TRANS', args=(TRANS_CONF, ), daemon=True)
 	p_get_trans.start()
@@ -218,4 +217,5 @@ if __name__ == '__main__':
 	p_get_trans.join()
 	p_get_order.join()
 
+	# 如有疑问+v：176516531
 
